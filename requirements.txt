@@ -8,7 +8,7 @@ pickleshare==0.7.5
 protobuf~=3.19.0
 click==8.0.3
 imblearn==0.10.1
-xgoost==1.7.5
+xgboost==1.7.5
 pip==24.2
 plotly~=5.14.1
 matplotlib~=3.7.1
