@@ -13,17 +13,17 @@ from sklearn.preprocessing import OneHotEncoder
 warnings.filterwarnings('ignore')
 
 # Load the trained model from the file
-model_path = r"C:\Users\User\.ipython\profile_default\my_new_model.pkl"
+model_path = r"/workspaces/Money-Laundering-Using-Machine-Learning/xgb_model.pkl"
 model = joblib.load(model_path)  
 # Load the model using joblib
 
-
- 
-@st.cache  # Use st.cache instead of st.cache_data
+@st.cache_data  # Updated caching method for data
 def get_img_as_base64(file):
     with open(file, "rb") as f:
         data = f.read()
     return base64.b64encode(data).decode()
+
+
 
 img = get_img_as_base64("image.jpg")
 
