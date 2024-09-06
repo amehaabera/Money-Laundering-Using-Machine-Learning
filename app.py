@@ -103,7 +103,7 @@ def app():
     input_data = preprocess_input(payment, amount, oldbalanceOrg, newbalanceOrg, oldbalanceDest, newbalanceDest)
     
     # make prediction
-    prediction = model.predict(input_data)
+    prediction = model_path.predict(input_data)
     
     # display result
     if prediction[0] == 0:
