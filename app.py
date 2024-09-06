@@ -2,8 +2,6 @@ import streamlit as st
 import pickle
 import pandas as pd
 
-warnings.filterwarnings('ignore')
-
 model_path = pickle.load(open('xgb_model.pkl', 'rb'))
 # Load the model using joblib
 
