@@ -1,15 +1,6 @@
-import pandas as pd
-import numpy as np
-import seaborn as sns
 import streamlit as st
-import joblib
 import pickle
-import warnings
-import altair as alt
-import sklearn
-import base64
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import OneHotEncoder
+import pandas as pd
 
 warnings.filterwarnings('ignore')
 
