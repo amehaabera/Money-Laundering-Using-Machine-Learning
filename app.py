@@ -2,8 +2,12 @@ import streamlit as st
 import pickle
 import pandas as pd
 
-model_path = pickle.load(open('xgb_model.pkl', 'rb'))
+
+import joblib
+
 # Load the model using joblib
+model_path = joblib.load(open('xgb_model.pkl', 'rb'))
+
 
 @st.cache_data  # Updated caching method for data
 def get_img_as_base64(file):
