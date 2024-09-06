@@ -12,8 +12,7 @@ from sklearn.preprocessing import OneHotEncoder
 
 warnings.filterwarnings('ignore')
 
-# Load the trained model from the file
-model_path = r"/workspaces/Money-Laundering-Using-Machine-Learning/xgb_model.pkl"
+model_path = pickle.load(open('xgb_model.pkl', 'rb'))
 model = joblib.load(model_path)  
 # Load the model using joblib
 
