@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import sklearn
+import base64
 
 # Load the model using joblib
 model_path = joblib.load(open('xgb_model.pkl', 'rb'))
