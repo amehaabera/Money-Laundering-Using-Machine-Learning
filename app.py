@@ -1,8 +1,5 @@
 import streamlit as st
-import pickle
 import pandas as pd
-
-
 import joblib
 
 # Load the model using joblib
