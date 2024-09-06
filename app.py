@@ -14,7 +14,6 @@ from sklearn.preprocessing import OneHotEncoder
 warnings.filterwarnings('ignore')
 
 model_path = pickle.load(open('xgb_model.pkl', 'rb'))
-model = joblib.load(model_path)  
 # Load the model using joblib
 
 @st.cache_data  # Updated caching method for data
