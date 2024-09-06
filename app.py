@@ -3,6 +3,7 @@ import numpy as np
 import seaborn as sns
 import streamlit as st
 import joblib
+import pickle
 import warnings
 import altair as alt
 import sklearn
