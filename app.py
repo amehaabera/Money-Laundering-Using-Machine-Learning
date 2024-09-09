@@ -94,8 +94,7 @@ def main():
                 input_data = [selected_value, float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest)]
                 prediction = fraud_detection(input_data)
                 st.success(prediction)
-            except ValueError:
-                st.error("Please enter valid numeric values for all fields.")
+
 
 if __name__ == '__main__':
     main()
