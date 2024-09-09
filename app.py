@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
 import pickle
-import sklearn
 import base64
 
-# Load the model using 
+# Load the model using caching for better performance
+@st.cache_resource
 def load_model():
     with open('xgb_model.pkl', 'rb') as file:
         model = pickle.load(file)
@@ -12,18 +12,17 @@ def load_model():
 
 model = load_model()
 
-
-@st.cache_data  # Updated caching method for data
+# Optional: Remove if you're not using a local image file
+@st.cache_data  # Cache data loading function
 def get_img_as_base64(file):
     with open(file, "rb") as f:
         data = f.read()
     return base64.b64encode(data).decode()
 
+# Example usage of the local image, if you choose to use it
+# img = get_img_as_base64("image.jpg")
 
-
-img = get_img_as_base64("image.jpg")
-
-
+# Set background with CSS (using an online image)
 page_bg_img = f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
@@ -44,10 +43,7 @@ page_bg_img = f"""
 </style>
 """
 
-
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
-
 
 def fraud_detection(input_data):
     # Define feature names
@@ -94,9 +90,12 @@ def main():
         if not amount or not oldbalanceOrg or not newbalanceOrig or not oldbalanceDest or not newbalanceDest:
             st.error("Please fill in all the fields.")
         else:
-            input_data = [selected_value, float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest)]
-            prediction = fraud_detection(input_data)
-            st.success(prediction)
+            try:
+                input_data = [selected_value, float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest)]
+                prediction = fraud_detection(input_data)
+                st.success(prediction)
+            except ValueError:
+                st.error("Please enter valid numeric values for all fields.")
 
 if __name__ == '__main__':
     main()
