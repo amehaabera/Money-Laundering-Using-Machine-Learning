@@ -1,11 +1,16 @@
 import streamlit as st
 import pandas as pd
-import joblib
+import pickle
 import sklearn
 import base64
 
-# Load the model using joblib
-model_path = joblib.load(open('xgb_model.pkl', 'rb'))
+# Load the model using 
+def load_model():
+    with open('xgb_model.pkl', 'rb') as file:
+        model = pickle.load(file)
+    return model
+
+model = load_model()
 
 
 @st.cache_data  # Updated caching method for data
@@ -75,18 +80,23 @@ def main():
     type_to_value = dict(zip(options, values))
     selected_value = type_to_value[type]
 
+    # Input fields
     amount = st.text_input('Enter the Total Amount of Transaction')
     oldbalanceOrg = st.text_input('Enter The old balance on the origin account before the transaction')
     newbalanceOrig = st.text_input('Enter The new balance on the origin account after the transaction')
     oldbalanceDest = st.text_input('Enter The old balance on the destination account before the transaction')
     newbalanceDest = st.text_input('Enter The new balance on the destination account after the transaction')
 
+    # Placeholder for prediction
     prediction = ''
 
     if st.button('Predict'):
-        input_data = [selected_value, float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest)]
-        prediction = fraud_detection(input_data)
-        st.success(prediction)
+        if not amount or not oldbalanceOrg or not newbalanceOrig or not oldbalanceDest or not newbalanceDest:
+            st.error("Please fill in all the fields.")
+        else:
+            input_data = [selected_value, float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest)]
+            prediction = fraud_detection(input_data)
+            st.success(prediction)
 
 if __name__ == '__main__':
     main()
