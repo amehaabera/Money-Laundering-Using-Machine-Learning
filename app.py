@@ -6,7 +6,11 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
 # Load the saved model
-model = pickle.load(open('best_model.pkl', 'rb'))
+with open('best_model.pkl', 'rb') as file:
+    model = pickle.load(file)
+
+# Check the type of the loaded model
+st.write(f"Loaded model type: {type(model)}")  # This will help you debug
 
 # Define feature names
 feature_names = ['step', 'type', 'amount', 'oldbalanceOrg', 'newbalanceOrig', 'oldbalanceDest', 'newbalanceDest', 'isFlaggedFraud']
