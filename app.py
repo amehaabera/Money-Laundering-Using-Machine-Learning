@@ -43,6 +43,9 @@ def fraud_detection(input_data):
     # Create a DataFrame with a single row using input_data
     input_df = pd.DataFrame([input_data], columns=feature_names)
 
+    # Debugging: print input DataFrame to check values
+    st.write("Input DataFrame:", input_df)
+
     # Make a prediction
     prediction = model.predict(input_df)
 
@@ -59,7 +62,10 @@ def main():
 
     # Create a selectbox for transaction type
     transaction_type = st.selectbox('Select the Type of Transaction', options)
-    selected_value = dict(zip(options, values))[transaction_type]
+    
+    # Map the selected transaction type to its corresponding value
+    type_to_value = dict(zip(options, values))
+    selected_value = type_to_value[transaction_type]
 
     # Input fields
     step = st.text_input('Enter the Step')
