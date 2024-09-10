@@ -4,7 +4,7 @@ import streamlit as st
 import pandas as pd
 
 # Load the saved model
-model = pickle.load(open('best_model.pkl', 'rb'))
+model = pickle.load(open('xgb_model.pkl', 'rb'))
 
 @st.cache_data
 def get_img_as_base64(file):
