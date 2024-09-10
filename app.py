@@ -77,7 +77,7 @@ def main():
     type_to_value = dict(zip(options, values))
     selected_value = type_to_value[type]
 
-    Type = st.text_input('Enter the Step')
+    type = st.text_input('Enter the Step')
     amount = st.text_input('Enter the Total Amount of Transaction')
     oldbalanceOrg = st.text_input('Enter The old balance on the origin account before the transaction')
     newbalanceOrig = st.text_input('Enter The new balance on the origin account after the transaction')
@@ -87,7 +87,7 @@ def main():
     prediction = ''
 
     if st.button('Predict'):
-        input_data = [selected_value, float(Type), float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest)]
+        input_data = [selected_value, float(type), float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest)]
         prediction = fraud_detection(input_data)
         st.success(prediction)
 
