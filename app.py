@@ -28,7 +28,7 @@ def preprocess_data(data):
     preprocessed_data['newbalanceOrig'] = input_df['newbalanceOrig']
     preprocessed_data['oldbalanceDest'] = input_df['oldbalanceDest']
     preprocessed_data['newbalanceDest'] = input_df['newbalanceDest']
-    preprocessed_data['isFlaggedFraud'] = input_df['isFlaggedFraud']  # Make sure to include this in the DataFrame
+    preprocessed_data['isFlaggedFraud'] = input_df['isFlaggedFraud']  # Include this feature
     
     return preprocessed_data
 
@@ -48,9 +48,9 @@ def main():
     step = st.number_input('Step', min_value=1)
     amount = st.number_input('Amount', min_value=0.0)
     oldbalanceOrg = st.number_input('Old Balance Origin')
-    newbalanceOrig = oldbalanceOrg - amount
+    newbalanceOrig = st.number_input('New Balance Origin', value=oldbalanceOrg)  # Allow user to enter this separately
     oldbalanceDest = st.number_input('Old Balance Destination')
-    newbalanceDest = oldbalanceDest + amount
+    newbalanceDest = st.number_input('New Balance Destination', value=oldbalanceDest)  # Allow user to enter this separately
     isFlaggedFraud = st.number_input('Is Flagged Fraud (0 or 1)', min_value=0, max_value=1)
 
     # Create a DataFrame from the input data
