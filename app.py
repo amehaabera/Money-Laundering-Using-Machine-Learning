@@ -38,7 +38,7 @@ st.markdown(page_bg_img, unsafe_allow_html=True)
 
 def fraud_detection(input_data):
     # Define feature names
-    feature_names = ['type', 'amount', 'oldbalanceOrg', 'newbalanceOrig', 'oldbalanceDest', 'newbalanceDest']
+    feature_names = ['step', 'type', 'amount', 'oldbalanceOrg', 'newbalanceOrig', 'oldbalanceDest', 'newbalanceDest', 'isFlaggedFraud']
 
     # Create a DataFrame with a single row using input_data
     input_df = pd.DataFrame([input_data], columns=feature_names)
@@ -62,11 +62,13 @@ def main():
     selected_value = dict(zip(options, values))[transaction_type]
 
     # Input fields
+    step = st.text_input('Enter the Step')
     amount = st.text_input('Enter the Total Amount of Transaction')
     oldbalanceOrg = st.text_input('Enter The old balance on the origin account before the transaction')
     newbalanceOrig = st.text_input('Enter The new balance on the origin account after the transaction')
     oldbalanceDest = st.text_input('Enter The old balance on the destination account before the transaction')
     newbalanceDest = st.text_input('Enter The new balance on the destination account after the transaction')
+    isFlaggedFraud = st.text_input('Is Flagged Fraud')
 
     prediction = ''
 
@@ -74,12 +76,14 @@ def main():
         try:
             # Convert inputs to floats and create input data
             input_data = [
+                float(step),
                 selected_value,
                 float(amount),
                 float(oldbalanceOrg),
                 float(newbalanceOrig),
                 float(oldbalanceDest),
-                float(newbalanceDest)
+                float(newbalanceDest),
+                float(isFlaggedFraud)
             ]
             prediction = fraud_detection(input_data)
             st.success(prediction)
