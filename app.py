@@ -83,12 +83,12 @@ def main():
     newbalanceOrig = st.text_input('Enter The new balance on the origin account after the transaction')
     oldbalanceDest = st.text_input('Enter The old balance on the destination account before the transaction')
     newbalanceDest = st.text_input('Enter The new balance on the destination account after the transaction')
-    newbalanceDest = st.text_input('Enter The new balance on the destination account after the transaction')
+    isFlaggedFraud = st.text_input('Is Flagged Fraud')
 
     prediction = ''
 
     if st.button('Predict'):
-        input_data = [selected_value, float(type), float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest), float(newbalanceDest)]
+        input_data = [selected_value, float(type), float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest), float(isFlaggedFraud)]
         prediction = fraud_detection(input_data)
         st.success(prediction)
 
