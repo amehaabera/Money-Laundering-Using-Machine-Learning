@@ -1,33 +1,30 @@
+
+import base64
+import pickle
+import joblib
 import streamlit as st
 import pandas as pd
-import pickle
-import base64
+from sklearn.preprocessing import LabelEncoder
+import numpy as np
 
-# Load the model using caching for better performance
-@st.cache_resource
-def load_model():
-    with open('xgb_model.pkl', 'rb') as file:
-        model = pickle.load(file)
-    return model
+# Load the saved model
+model = joblib.load('best_model.pkl') 
 
-model = load_model()
 
-# Optional: Remove if you're not using a local image file
-@st.cache_data  # Cache data loading function
+@st.cache_data
 def get_img_as_base64(file):
     with open(file, "rb") as f:
         data = f.read()
     return base64.b64encode(data).decode()
 
-# Example usage of the local image, if you choose to use it
-# img = get_img_as_base64("image.jpg")
 
-# Set background with CSS (using an online image)
+img = get_img_as_base64("image.jpg")
+
 page_bg_img = f"""
 <style>
 [data-testid="stAppViewContainer"] > .main {{
     background-image: url("https://images.unsplash.com/photo-1501426026826-31c667bdf23d");
-    background-size: 280%;
+    background-size: 180%;
     background-position: top left;
     background-repeat: no-repeat;
     background-attachment: local;
@@ -43,58 +40,69 @@ page_bg_img = f"""
 </style>
 """
 
+
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
-def fraud_detection(input_data):
-    # Define feature names
-    feature_names = ['type', 'amount', 'oldbalanceOrg', 'newbalanceOrig', 'oldbalanceDest', 'newbalanceDest']
 
-    # Convert input_data to a dictionary with feature names
-    input_dict = dict(zip(feature_names, input_data))
 
-    # Create a DataFrame with a single row using input_dict
-    input_df = pd.DataFrame(input_dict, index=[0])
 
-    # Make a prediction
-    prediction = model.predict(input_df)
+# Function to preprocess input data
+def preprocess_data(data):
+    input_df = data.copy()
+    preprocessed_data = pd.DataFrame()
+    le = LabelEncoder()
+    preprocessed_data['step'] = input_df['step']
+    preprocessed_data['type'] = le.fit_transform(input_df['type'])
+    preprocessed_data['amount'] = np.log1p(input_df['amount'])
+    preprocessed_data['oldbalanceOrg'] = input_df['oldbalanceOrg']
+    preprocessed_data['newbalanceOrig'] = input_df['newbalanceOrig']
+    preprocessed_data['oldbalanceDest'] = input_df['oldbalanceDest']
+    preprocessed_data['newbalanceDest'] = input_df['newbalanceDest']
+    return preprocessed_data
 
-    if prediction[0] == 0:
-        return 'Not a fraudulent transaction'
-    else:
-        return 'Fraudulent transaction'
 
+# Function to make predictions using the loaded model
+def predict(data):
+    preprocessed_data = preprocess_data(data)
+    predictions = model.predict(preprocessed_data)
+    return predictions
+
+
+# Create the Streamlit app
 def main():
     st.title('**Money Laundering Transaction Detection System!!**')
 
-    options = ['PAYMENT', 'TRANSFER', 'CASH_OUT', 'DEBIT', 'CASH_IN']
-    values = [2, 4, 1, 5, 3]
-
-    # Create a selectbox for transaction type
-    type = st.selectbox('Select the Type of Transaction', options)
-
-    # Use a dictionary to map the selected transaction type to its corresponding value
-    type_to_value = dict(zip(options, values))
-    selected_value = type_to_value[type]
-
-    # Input fields
+    # Create input form
+    st.header('Enter transaction details:')
+    _type = st.selectbox(label='Select payment type', options=['CASH-IN', 'CASH-OUT', 'DEBIT', 'PAYMENT','TRANSFER'])
     amount = st.text_input('Enter the Total Amount of Transaction')
     oldbalanceOrg = st.text_input('Enter The old balance on the origin account before the transaction')
     newbalanceOrig = st.text_input('Enter The new balance on the origin account after the transaction')
     oldbalanceDest = st.text_input('Enter The old balance on the destination account before the transaction')
     newbalanceDest = st.text_input('Enter The new balance on the destination account after the transaction')
 
-    # Placeholder for prediction
-    prediction = ''
 
+    # Create a DataFrame from the input data
+    input_data = pd.DataFrame({'type': [_type],
+                               'step': [step],
+                               'amount': [amount],
+                               'oldbalanceOrg': [oldbalanceOrg],
+                               'newbalanceOrig': [newbalanceOrig],
+                               'oldbalanceDest': [oldbalanceDest],
+                               'newbalanceDest': [newbalanceDest]
+                               })
+
+    # Make predictions on button click
     if st.button('Predict'):
-        if not amount or not oldbalanceOrg or not newbalanceOrig or not oldbalanceDest or not newbalanceDest:
-            st.error("Please fill in all the fields.")
-        else:
-            try:
-                input_data = [selected_value, float(amount), float(oldbalanceOrg), float(newbalanceOrig), float(oldbalanceDest), float(newbalanceDest)]
-                prediction = fraud_detection(input_data)
-                st.success(prediction)
+        predictions = predict(input_data)
+        is_fraud = ''
+        if predictions[0] == 1:
+            is_fraud = 'Fraud'
+        else: 
+            is_fraud = 'Normal'
+        st.write(f'Predicted Class : {is_fraud}')
 
 
+# Run the app
 if __name__ == '__main__':
     main()
