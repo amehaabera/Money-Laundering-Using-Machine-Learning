@@ -44,7 +44,7 @@ def predict(data):
 
 # Create the Streamlit app
 def main():
-    st.title('Fraud Detection App')
+    st.title('**Money Laundering Transaction Detection System!!**')
 
     # Create input form
     st.header('Enter transaction details:')
