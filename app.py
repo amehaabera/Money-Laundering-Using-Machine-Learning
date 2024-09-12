@@ -6,7 +6,7 @@ from sklearn.preprocessing import LabelEncoder
 import numpy as np
 
 # Load the saved model
-with open('best_model.pkl', 'rb') as file:
+with open('best_model', 'rb') as file:
     model = pickle.load(file)
 
 # Check the type of the loaded model
