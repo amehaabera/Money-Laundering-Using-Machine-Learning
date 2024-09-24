@@ -38,3 +38,10 @@
  Achieved ML accuracy of 90%
  
  Successfully achieved a cost saving of 10-15% annually as economic success criteria.
+
+
+Streamlit app to GitHub, click on the following link:
+https://money-laundering-using-machine-learning.streamlit.app/
+
+To view the project only, click on the following link:
+ https://nbviewer.org/github/amehaabera/Money-Laundering-Using-Machine-Learning/blob/main/Money%20Laundering%20Using%20Machine%20Learning.ipynb
