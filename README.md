@@ -83,7 +83,7 @@ I will also compare the performance of this model with a few other algorithms at
  Business Solution:
  We developed a classification model using XGBoost to detect and prevent money laundering after 
  preprocessing the transaction data.The Model was optimized with hyperparameter tuning and 
- deployment on Streamlit. 
+ deployment on Streamlit.. 
 
 ![image](https://user-images.githubusercontent.com/107097836/231666058-0f6e8cb9-ff7d-4d38-9dc9-28a9ed639ceb.png)
 
