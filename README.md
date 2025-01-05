@@ -113,4 +113,5 @@ Streamlit app to GitHub, click on the following link:
 https://money-laundering-using-machine-learning.streamlit.app/
 
 To view the project only, click on the following link:
- https://nbviewer.org/github/amehaabera/Money-Laundering-Using-Machine-Learning/blob/main/Money%20Laundering%20Using%20Machine%20Learning.ipynb
+ [https://nbviewer.org/github/amehaabera/Money-Laundering-Using-Machine-Learning/blob/main/Money%20Laundering%20Using%20Machine%20Learning.ipynb
+](https://nbviewer.org/github/amehaabera/Money-Laundering-Using-Machine-Learning/blob/main/Final%20Money%20Laundering%20Using%20Machine%20Learning.ipynb)
