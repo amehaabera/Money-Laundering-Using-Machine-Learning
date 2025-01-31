@@ -160,7 +160,7 @@ def main():
         - **Developer**: Ameha Abera Kidane
         - **Email**: amehaabera@gmail.com
         - **Linkedin**: https://www.linkedin.com/in/ameha-abera-kidane/
-        - **GitHub**: [Your GitHub Profile](https://github.com/amehaabera)
+        - **GitHub**: https://github.com/amehaabera
         """)
 
 if __name__ == '__main__':
