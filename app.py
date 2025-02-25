@@ -137,16 +137,16 @@ def main():
                 st.error(f"Error: {str(e)}")
 
     elif page == "About":
-        st.title("About")
-        st.markdown("""
-        **Model Details**:  
-        - Algorithm: Optimized XGBoost Classifier  
-        - Features: 17 transaction attributes  
-        - Last Updated: February 2025  
+        st.title("About the Application")
+        st.write("""This application helps detect potential money laundering transactions using a trained machine learning model.
+        This application was developed to help detect potential money laundering transactions using machine learning.
+        The model is trained on a dataset of historical transactions and uses various transaction features to make predictions.""")
+        st.write("""  
         
         **Contact**:  
-        [Ameha Abera](mailto:amehaabera@gmail.com)  
+        [Ameha Abera Kidane](mailto:amehaabera@gmail.com)  
         [LinkedIn Profile](https://www.linkedin.com/in/ameha-abera-kidane/)
+        [Github Profile](https://github.com/amehaabera)
         """)
 
 if __name__ == "__main__":
