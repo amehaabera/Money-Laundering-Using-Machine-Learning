@@ -67,6 +67,8 @@ def main():
 
     if page == "Home":
         st.title("AML Transaction Monitoring System")
+        st.write("""This application uses a machine learning model to predict the likelihood of a transaction being fraudulent. This application uses machine learning models to predict the likelihood of a transaction being fraudulent.
+        You can enter the transaction details and the system will predict if the transaction is **Normal** or **Fraudulent**.""")
         st.markdown("""
         Predict fraudulent transactions using machine learning.  
         **Instructions**:  
