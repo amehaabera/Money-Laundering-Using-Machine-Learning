@@ -147,7 +147,7 @@ def main():
         
         **Contact**:  
         [Ameha Abera Kidane](mailto:amehaabera@gmail.com)  
-        [LinkedIn Profile](https://www.linkedin.com/in/ameha-abera-kidane/)
+        [LinkedIn Profile](https://www.linkedin.com/in/ameha-abera-kidane/)  
         [Github Profile](https://github.com/amehaabera)
         """)
 
