@@ -9,13 +9,10 @@ The findings underscore the limitations of accuracy as a performance metric in i
 
 
 Conclusion
-The study demonstrates that XGBoost, combined with synthetic minority oversampling (SMOTE), is the most effective approach for detecting money laundering transactions. By addressing class imbalance and prioritizing recall, XGBoost achieved near-perfect detection rates (e.g., 99.99% recall in Iteration 3) while maintaining high precision (92.2–99.82%). The algorithm’s adaptability to preprocessing techniques like subsampling and hyperparameter tuning underscores its superiority over other models, including Random Forest, which prioritized precision at the cost of missing critical fraud cases. Key features such as transaction balances, amounts, and types emerged as critical indicators of suspicious activity, aligning with patterns observed in exploratory data analysis (EDA). While high accuracy scores (e.g., 99.98%) were achieved on balanced data, the study highlights the limitations of accuracy as a metric in imbalanced real-world scenarios, advocating for F1-score and confusion matrices as more reliable performance indicators. Deploying the model as a Streamlit application provided a practical tool for real-time fraud detection, addressing the limitations of traditional rule-based systems. The proposed solution addresses key limitations of traditional rule-based systems, such as high false positive rates and lack of adaptability to evolving fraud patterns. The following conclusions were drawn:
-
-
- Business Solution:
- We developed a classification model using XGBoost to detect and prevent money laundering after 
- preprocessing the transaction data.The Model was optimized with hyperparameter tuning and 
- deployment on Streamlit.. 
+This study demonstrates that XGBoost, combined with synthetic minority oversampling (SMOTE), is the most effective approach for detecting money laundering transactions. By addressing class imbalance and prioritizing recall, XGBoost achieved near-perfect detection rates (e.g., 99.96% recall in Iteration 3) while maintaining high precision (96.82–99.58%). The algorithm’s adaptability to preprocessing techniques, such as subsampling and hyperparameter tuning, underscores its superiority over alternatives like Random Forest, which prioritized precision at the cost of missing critical fraud cases (e.g., 566 undetected frauds in Iteration 3).
+Key features such as transaction types (TRANSFER/CASH_OUT), balance dynamics (New/Old Balance Orig/Dest), and temporal patterns (Transaction Day/Hour) emerged as the most discriminative indicators of suspicious activity, aligning with findings from exploratory data analysis (EDA). While high accuracy scores (e.g., 99.82% in Iteration 3) were achieved on balanced data, the study highlights the limitations of accuracy in imbalanced real-world scenarios, advocating for F1-score and confusion matrices as more reliable metrics.
+The deployment of the model as a Streamlit application provided a practical tool for real-time fraud detection, addressing the limitations of traditional rule-based systems (e.g., high false positives and rigidity to evolving fraud patterns).
+ 
 
 ![image](https://user-images.githubusercontent.com/107097836/231666058-0f6e8cb9-ff7d-4d38-9dc9-28a9ed639ceb.png)
 
